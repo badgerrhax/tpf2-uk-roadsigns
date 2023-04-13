@@ -1,0 +1,4 @@
+local materials = require "bh_uk_roadsigns/bh_materials"
+function data()
+	return materials.individualSignMaterial("watercourse")
+end

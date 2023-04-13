@@ -1,0 +1,67 @@
+local function configKey(key)
+  return "bh_individual_larger_signs_" .. key
+end
+
+local function mdl(sign)
+  return "bh_uk_roadsigns/larger_roadside/bh_" .. sign .. ".mdl"
+end
+
+local function signIcons(signs)
+  local icons = {}
+  for i, v in ipairs(signs) do
+    icons[#icons + 1] = "ui/parameters/bh_uk_roadsigns/larger_roadside_signs/bh_" .. v .. ".tga"
+  end
+  return icons
+end
+
+local signs = {
+  "100ydjn",
+  "100ydjnr",
+  "200ydjn",
+  "200ydjnr",
+  "300ydjn",
+  "300ydjnr",
+  "a100ydjn",
+  "a100ydjnr",
+  "a200ydjn",
+  "a200ydjnr",
+  "a300ydjn",
+  "a300ydjnr",
+}
+
+function data()
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = "UK Roadsigns (Larger / Motorway etc)",
+      description = "Larger signs found on motorways and dual carriageways",
+      icon = "ui/construction/asset/bh_uk_roadsigns/bh_larger_roadside@2x.tga",
+    },
+    availability = {},
+    buildMode = "SINGLE",
+    categories = { "badgerrhax" },
+    order = 14,
+    skipCollision = true,
+    autoRemovable = false,
+    params = {
+      {
+        key = configKey("sign"),
+        name = _("Sign"),
+        uiType = "ICON_BUTTON",
+        values = signIcons(signs),
+      },
+    },
+    updateFn = function(params)
+      local result = {}
+      local sign = mdl(signs[params[configKey("sign")] + 1])
+      local identity = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }
+
+      result.models = { { id = sign, transf = identity } }
+
+      result.terrainAlignmentLists = { { type = "EQUAL", faces = {} } }
+      result.groundFaces = {}
+
+      return result
+    end
+  }
+end

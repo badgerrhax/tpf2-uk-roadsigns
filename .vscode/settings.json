@@ -1,0 +1,10 @@
+{
+  "Lua.diagnostics.globals": [
+    "_",
+    "api",
+    "debugPrint"
+  ],
+  "Lua.diagnostics.disable": [
+    "need-check-nil"
+  ]
+}

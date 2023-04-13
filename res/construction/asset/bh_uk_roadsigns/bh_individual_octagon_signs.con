@@ -1,0 +1,15 @@
+local constructions = require "bh_uk_roadsigns/bh_constructions"
+
+local signs = {
+  "stop",
+}
+
+function data()
+  return constructions.signConstruction(
+    "UK Roadsigns (Octagon shape)",
+    "Octagon-shaped signs",
+    "ui/construction/asset/bh_uk_roadsigns/bh_octagon_signs@2x.tga",
+    "octagon",
+    signs
+  )
+end
